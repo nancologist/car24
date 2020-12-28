@@ -41,3 +41,5 @@ ___
 
 * For MongoDB:
     * ``mongoose``
+
+After installing these packages in one tab of terminal first run ``tsc -w`` and in other tab, after that run ``npm start``.
