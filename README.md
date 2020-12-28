@@ -31,8 +31,10 @@ ___
 * ``nodemon -dev``
 
 * GraphQL:
-    * ``graphql`` (_Mori: maybe it's better not to use TS on GraphQl to learn the GraphQL schema better._)
-    * ``express-graphql``
+    * ``graphql``
+    * ``express-graphql``  
+
+(_Mori: First I will build it REST and then I will change implement a parallel version in GraphQL._)
 
 * For TS:
     * ``@types/node -dev``
@@ -41,5 +43,12 @@ ___
 
 * For MongoDB:
     * ``mongoose``
+    * Maybe we need ``@typegoose``?!!!
 
 After installing these packages in one tab of terminal first run ``tsc -w`` and in other tab, after that run ``npm start``.
+___
+
+## 2.2. Implementation
+
+* __ERROR:__ Instead of ``require()`` you should use ``import`` to profit from TS-IDE helps!
+
