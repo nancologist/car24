@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import { getCars } from '../controllers/cars';
+import { getCars, addCar } from '../controllers/cars';
 
 const router = Router();
 
-// router.post('/add-car', );
+router.post('/add-car', addCar);
 
 router.get('/cars', getCars);
 
