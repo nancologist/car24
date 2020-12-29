@@ -7,12 +7,11 @@ const FAKE_CARS_DB: Car[] = [
     { name: 'Audi RS6', power: 600, id: "3" },
 ]
 
-type inputCar = {
-    name: string;
-    power: number;
-};
+type inputCar = { name: string; power: number; };
 
-export const addCar: RequestHandler<null, { message: string, addedCar: Car }, inputCar> = (req, res, next) => {
+type resType = { message: string; addedCar: Car; };
+
+export const addCar: RequestHandler<null, resType, inputCar> = (req, res) => {
     const { name, power } = req.body;
     const car = new Car(name, power);
     FAKE_CARS_DB.push(car);
@@ -24,8 +23,31 @@ export const addCar: RequestHandler<null, { message: string, addedCar: Car }, in
     })
 }
 
-export const getCars: RequestHandler<null, { Cars: Car[] }> = (req, res, next) => {
-    res.status(200).json({ Cars: FAKE_CARS_DB })
+export const getCars: RequestHandler<null, { cars: Car[] }> = (req, res) => {
+    res.status(200).json({ cars: FAKE_CARS_DB })
 }
 
-// export const updateCar: RequestHandler<>
+export const getCar: RequestHandler<{ carId: string }> = (req, res) => {
+    const { carId } = req.params;
+    const index = FAKE_CARS_DB.findIndex(car => car.id === carId);
+    
+    const carExists = index >= 0;
+    if (!carExists) {
+        throw new Error('Car not found!')
+    }
+
+    const car = FAKE_CARS_DB[index]
+    res.status(200).json({ car })
+}
+
+// export const updateCar: RequestHandler<{ carId: string }, resType> = (req, res) => {
+//     const { carId } = req.params;
+//     const index = FAKE_CARS_DB.findIndex(car => car.id === carId);
+//     const carExists = index >= 0;
+    
+    // if (!carExists) {
+    //     throw new Error('Car not found!')
+    // }
+
+
+// }
