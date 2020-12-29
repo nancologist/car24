@@ -54,3 +54,17 @@ export const updateCar: RequestHandler<{ carId: string }, resType> = (req, res) 
 
     res.status(201).json({ message: 'Car details updated!', car });
 }
+
+export const deleteCar: RequestHandler = (req, res) => {
+    const { carId } = req.params;
+    const index = FAKE_CARS_DB.findIndex(car => car.id === carId);
+    
+    const carExists = index >= 0;
+    if (!carExists) {
+        throw new Error('Car not found!')
+    }
+
+    const car = FAKE_CARS_DB[index];
+    FAKE_CARS_DB.splice(index, 1);
+    res.status(200).json({ message: 'Car successfully removed!', deletedCar: car, cars: FAKE_CARS_DB });
+}

@@ -6,7 +6,7 @@ const app = express();
 
 app.use(bodyParser.json());
 
-app.use('/', carsRoutes)
+app.use('/cars', carsRoutes)
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     // These Errors are the ones,
