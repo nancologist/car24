@@ -9,7 +9,7 @@ const FAKE_CARS_DB: Car[] = [
 
 type inputCar = { name: string; power: number; };
 
-type resType = { message: string; addedCar: Car; };
+type resType = { message: string; car: Car; };
 
 export const addCar: RequestHandler<null, resType, inputCar> = (req, res) => {
     const { name, power } = req.body;
@@ -17,10 +17,7 @@ export const addCar: RequestHandler<null, resType, inputCar> = (req, res) => {
     FAKE_CARS_DB.push(car);
 
     // res.status(302).redirect('/cars');
-    res.status(201).json({
-        message: 'Car successfully added!',
-        addedCar: car
-    })
+    res.status(201).json({ message: 'Car successfully added!', car });
 }
 
 export const getCars: RequestHandler<null, { cars: Car[] }> = (req, res) => {
@@ -40,14 +37,20 @@ export const getCar: RequestHandler<{ carId: string }> = (req, res) => {
     res.status(200).json({ car })
 }
 
-// export const updateCar: RequestHandler<{ carId: string }, resType> = (req, res) => {
-//     const { carId } = req.params;
-//     const index = FAKE_CARS_DB.findIndex(car => car.id === carId);
-//     const carExists = index >= 0;
+export const updateCar: RequestHandler<{ carId: string }, resType> = (req, res) => {
+    const { carId } = req.params;
+    const index = FAKE_CARS_DB.findIndex(car => car.id === carId);
     
-    // if (!carExists) {
-    //     throw new Error('Car not found!')
-    // }
+    const carExists = index >= 0;
+    if (!carExists) {
+        throw new Error('Car not found!')
+    }
 
+    const { name, power } = req.body;
+    const car = FAKE_CARS_DB[index]
+    if (!name && !power) throw new Error('INVALID REQUEST BODY');
+    if(!!name) car.name = name;
+    if(!!power) car.power = power;
 
-// }
+    res.status(201).json({ message: 'Car details updated!', car });
+}
