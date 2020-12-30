@@ -1,4 +1,4 @@
-import { RequestHandler } from 'express';
+import { RequestHandler, Request, Response } from 'express';
 import Car from '../models/car';
 
 const FAKE_CARS_DB: Car[] = [
@@ -24,7 +24,8 @@ export const getCars: RequestHandler<null, { cars: Car[] }> = (req, res) => {
     res.status(200).json({ cars: FAKE_CARS_DB })
 }
 
-export const getCar: RequestHandler<{ carId: string }> = (req, res) => {
+// RUD = Read, Update, Delete
+export const handleCarRUD: RequestHandler<{ carId: string }> = (req, res) => {
     const { carId } = req.params;
     const index = FAKE_CARS_DB.findIndex(car => car.id === carId);
     
@@ -33,38 +34,79 @@ export const getCar: RequestHandler<{ carId: string }> = (req, res) => {
         throw new Error('Car not found!')
     }
 
-    const car = FAKE_CARS_DB[index]
-    res.status(200).json({ car })
+    switch (req.method) {
+        case 'GET':
+            const car = FAKE_CARS_DB[index]
+            res.status(200).json({ car })
+            break;
+
+        case 'PATCH':
+            updateCar(req, res, index);
+            break;
+
+        case 'DELETE':
+            deleteCar(req, res, index);
+            break;
+    
+        default:
+            throw new Error('INVALID REQUEST');
+    }
 }
 
-export const updateCar: RequestHandler<{ carId: string }, resType> = (req, res) => {
-    const { carId } = req.params;
-    const index = FAKE_CARS_DB.findIndex(car => car.id === carId);
-    
-    const carExists = index >= 0;
-    if (!carExists) {
-        throw new Error('Car not found!')
-    }
-
+function updateCar (req: Request, res: Response, index: number) {
     const { name, power } = req.body;
     const car = FAKE_CARS_DB[index]
     if (!name && !power) throw new Error('INVALID REQUEST BODY');
     if(!!name) car.name = name;
     if(!!power) car.power = power;
-
     res.status(201).json({ message: 'Car details updated!', car });
 }
 
-export const deleteCar: RequestHandler = (req, res) => {
-    const { carId } = req.params;
-    const index = FAKE_CARS_DB.findIndex(car => car.id === carId);
-    
-    const carExists = index >= 0;
-    if (!carExists) {
-        throw new Error('Car not found!')
-    }
-
+function deleteCar (req: Request, res: Response, index: number) {
     const car = FAKE_CARS_DB[index];
     FAKE_CARS_DB.splice(index, 1);
     res.status(200).json({ message: 'Car successfully removed!', deletedCar: car, cars: FAKE_CARS_DB });
 }
+
+
+/**
+Old way of handling CRUD on /:carId Route Requests. Because of the "carExists" redundancy,
+I commented the followings out and used Switch-Case statement in the function {@link handleCarRequests()}
+*/
+
+// export const getCar: RequestHandler<{ carId: string }> = (req, res) => {
+//     const { carId } = req.params;
+//     const index = FAKE_CARS_DB.findIndex(car => car.id === carId);
+    
+//     const carExists = index >= 0;
+//     if (!carExists) {
+//         throw new Error('Car not found!')
+//     }
+
+//     const car = FAKE_CARS_DB[index]
+//     res.status(200).json({ car })
+// }
+
+// export const updateCar: RequestHandler<{ carId: string }, resType> = (req, res) => {
+//     const { carId } = req.params;
+//     const index = FAKE_CARS_DB.findIndex(car => car.id === carId);
+    
+//     const carExists = index >= 0;
+//     if (!carExists) {
+//         throw new Error('Car not found!')
+//     }
+// }
+
+// export const deleteCar: RequestHandler = (req, res) => {
+//     const { carId } = req.params;
+//     const index = FAKE_CARS_DB.findIndex(car => car.id === carId);
+    
+//     const carExists = index >= 0;
+//     if (!carExists) {
+//         throw new Error('Car not found!')
+//     }
+
+//     const car = FAKE_CARS_DB[index];
+//     FAKE_CARS_DB.splice(index, 1);
+//     res.status(200).json({ message: 'Car successfully removed!', deletedCar: car, cars: FAKE_CARS_DB });
+// }

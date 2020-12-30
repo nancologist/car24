@@ -22,7 +22,7 @@ ___
 
 # 2. Backend
 
-## 2.1. Required Packages for ExpressJS, Typescript and MongoDB:__
+## 2.1. Required Packages:__
 * ``npm init``
 * ``tsc --init``
 
@@ -44,11 +44,16 @@ ___
 * For MongoDB:
     * ``mongoose``
     * Maybe we need ``@typegoose``?!!!
+    * Maybe first directly work or Read about direct MongoDB JS interface.
 
 After installing these packages in one tab of terminal first run ``tsc -w`` and in other tab, after that run ``npm start``.
+
+* For Inline Documentation and Comments:
+    * ``jsdoc -dev``
 ___
 
-## 2.2. Implementation
+## 2.2. Implementation Notices
 
 * __ERROR:__ Instead of ``require()`` you should use ``import`` to profit from TS-IDE helps!
 
+* __ATTENTION - DO NOT USE .use():__ ``.all()`` (Express Router): To handle all different types of HTTP Requests together. (look at ``routes/cars.ts -> /:carId``)

@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getCars, addCar, getCar, updateCar, deleteCar } from '../controllers/cars';
+import { getCars, addCar, handleCarRUD } from '../controllers/cars';
 
 const router = Router();
 
@@ -7,12 +7,10 @@ router.post('/', addCar);
 
 router.get('/', getCars);
 
-router.get('/:carId', getCar)
+router.all('/:carId', handleCarRUD)
 
-router.patch('/:carId', updateCar)
+// router.patch('/:carId', updateCar)
 
-router.delete('/:carId', deleteCar)
-
-// router.delete('/cars/:carId', )
+// router.delete('/:carId', deleteCar)
 
 export default router;
