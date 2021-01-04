@@ -1,13 +1,13 @@
 import { Router } from 'express';
-import { getCars, addCar, handleCarRUD } from '../controllers/cars';
+import { addCar } from '../controllers/cars';
 
 const router = Router();
 
 router.post('/', addCar);
 
-router.get('/', getCars);
+// router.get('/', getCars);
 
-router.all('/:carId', handleCarRUD)
+// router.all('/:carId', handleCarRUD)
 
 // router.patch('/:carId', updateCar)
 

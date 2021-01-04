@@ -18,6 +18,7 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
 mongoClient.connect(err => {
     if (!!err) {
         console.log(err);
+        throw err;
     }
     app.listen(8080);
     // console.log(mongoClient);
