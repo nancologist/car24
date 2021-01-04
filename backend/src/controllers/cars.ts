@@ -69,6 +69,9 @@ function deleteCar (req: Request, res: Response, index: number) {
 }
 
 
+
+
+
 /**
 The following out-commented request handlers (getCar(), updateCar() and deleteCar()) are my old way of handling CRUD on /:carId Route Requests. Because of the "carExists" redundancy,
 I commented the followings out and used Switch-Case statement in the function {@link handleCarRequests()}

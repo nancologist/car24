@@ -1,6 +1,7 @@
 import express, { Request, Response, NextFunction } from 'express';
 import bodyParser from 'body-parser';
 import carsRoutes from './routes/cars';
+import { client as mongoClient } from './database/index';
 
 const app = express();
 
@@ -14,4 +15,10 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     res.status(500).json({ message: err.message });
 });
 
-app.listen(8080);
+mongoClient.connect(err => {
+    if (!!err) {
+        console.log(err);
+    }
+    app.listen(8080);
+    // console.log(mongoClient);
+})
