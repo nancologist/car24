@@ -2,14 +2,14 @@ import { ObjectId } from 'mongodb';
 import { getDB } from '../database/index'
 
 export default class {
-    private id: ObjectId | null;
+    private _id: ObjectId | null; // It must be _id (for MongoDB)
     public name: string;
     public power: number;
 
     constructor(name: string, power: number, id?: string) {
         this.name = name;
         this.power = power;
-        this.id = id ? new ObjectId(id) : null;
+        this._id = id ? new ObjectId(id) : null;
     }
 
     save() {
