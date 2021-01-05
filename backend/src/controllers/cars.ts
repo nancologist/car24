@@ -18,9 +18,17 @@ export const addCar: RequestHandler<null, resType, inputCar> = (req, res) => {
         })
 }
 
-// export const getCars: RequestHandler<null, { cars: Car[] }> = (req, res) => {
-//     res.status(200).json({ cars: FAKE_CARS_DB })
-// }
+export const getCars: RequestHandler<null, { cars: Car[] }> = (req, res) => {
+    Car.getAll()
+        .then((cars) => {
+            if (cars) {
+                res.json({ cars })
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        })
+}
 
 // RUD = Read, Update, Delete
 // export const handleCarRUD: RequestHandler<{ carId: string }> = (req, res) => {

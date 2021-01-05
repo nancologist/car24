@@ -16,4 +16,16 @@ export default class {
         const db = getDB();
         return db.collection('cars').insertOne(this);
     }
+
+    static getAll() {
+        const db = getDB();
+        return db.collection('cars').find().toArray()
+            .then(cars => {
+                console.log(cars);
+                return cars;
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
 }
