@@ -21,11 +21,24 @@ export default class {
         const db = getDB();
         return db.collection('cars').find().toArray()
             .then(cars => {
-                console.log(cars);
                 return cars;
             })
             .catch(err => {
-                console.log(err);
+                return err;
+            });
+    }
+
+    static findById(id: string) {
+        const db = getDB();
+        const objId = new ObjectId(id)
+
+        return db.collection('cars').findOne({ _id: objId })
+            .then(car => {
+                if (!car) throw 'No Car Found!!';
+                return car;
+            })
+            .catch(err => {
+                return err;
             });
     }
 }

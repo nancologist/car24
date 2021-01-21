@@ -5,7 +5,7 @@ type inputCar = { name: string; power: number; };
 
 type resType = { message: string; car: Car; };
 
-export const addCar: RequestHandler<null, resType, inputCar> = (req, res) => {
+export const addCar: RequestHandler<null, resType | { errMsg: string }, inputCar> = (req, res) => {
     const { name, power } = req.body;
     const car = new Car(name, power);
     car.save()
@@ -14,11 +14,11 @@ export const addCar: RequestHandler<null, resType, inputCar> = (req, res) => {
             res.status(201).json({ message: 'Car successfully added!', car });
         })
         .catch(err => {
-            console.log(err);
+            res.json({ errMsg: err });
         })
 }
 
-export const getCars: RequestHandler<null, { cars: Car[] }> = (req, res) => {
+export const getCars: RequestHandler<null, { cars: Car[] } | { errMsg: string }> = (req, res) => {
     Car.getAll()
         .then((cars) => {
             if (cars) {
@@ -26,25 +26,25 @@ export const getCars: RequestHandler<null, { cars: Car[] }> = (req, res) => {
             }
         })
         .catch(err => {
-            console.log(err);
+            res.json({ errMsg: err });
         })
 }
 
 // RUD = Read, Update, Delete
-// export const handleCarRUD: RequestHandler<{ carId: string }> = (req, res) => {
-//     const { carId } = req.params;
-//     const index = FAKE_CARS_DB.findIndex(car => car.id === carId);
-    
-//     const carExists = index >= 0;
-//     if (!carExists) {
-//         throw new Error('Car not found!')
-//     }
+export const handleCarRUD: RequestHandler<{ carId: string }> = (req, res) => {
+    const { carId } = req.params;
+    // const index = FAKE_CARS_DB.findIndex(car => car.id === carId);
 
-//     switch (req.method) {
-//         case 'GET':
-//             const car = FAKE_CARS_DB[index]
-//             res.status(200).json({ car })
-//             break;
+    switch (req.method) {
+        case 'GET':
+            Car.findById(carId)
+                .then(car => {
+                    res.json({ car });
+                })
+                .catch(err => {
+                    res.status(404).json({ msg: err });
+                });
+            break;
 
 //         case 'PATCH':
 //             updateCar(req, res, index);
@@ -54,10 +54,10 @@ export const getCars: RequestHandler<null, { cars: Car[] }> = (req, res) => {
 //             deleteCar(req, res, index);
 //             break;
     
-//         default:
-//             throw new Error('INVALID REQUEST');
-//     }
-// }
+        default:
+            throw new Error('INVALID REQUEST');
+    }
+}
 
 // function updateCar (req: Request, res: Response, index: number) {
 //     const { name, power } = req.body;
