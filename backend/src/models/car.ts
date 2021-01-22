@@ -1,7 +1,7 @@
 import { ObjectId } from 'mongodb';
 import { getDB } from '../database/index'
 
-export default class {
+class Car {
     private _id: ObjectId | null; // It must be _id (for MongoDB)
     public name: string;
     public power: number;
@@ -28,17 +28,39 @@ export default class {
             });
     }
 
-    static findById(id: string) {
+    static findById(id: string): Promise<Car> {
         const db = getDB();
         const objId = new ObjectId(id)
 
         return db.collection('cars').findOne({ _id: objId })
             .then(car => {
-                if (!car) throw 'No Car Found!!';
+                if (!car) throw new Error('No Car Found!!');
                 return car;
             })
             .catch(err => {
                 return err;
             });
     }
+
+    static update(id: string, name: string, power: string) {
+        const db = getDB();
+        const objId = new ObjectId(id)
+
+        return db.collection('cars').findOneAndUpdate(
+            { _id: objId },
+            { $set: { name, power } },
+            { returnOriginal: false }
+        )
+            .then(({ value: updatedCar}) => {
+                if (!updatedCar) {
+                    throw new Error('Update Failed!')
+                }
+                return updatedCar;
+            })
+            .catch(err => {
+                return err;
+            });
+    }
 }
+
+export default Car;

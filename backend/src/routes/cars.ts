@@ -9,7 +9,7 @@ router.get('/', getCars);
 
 router.all('/:carId', handleCarRUD)
 
-// router.patch('/:carId', updateCar)
+router.patch('/:carId', handleCarRUD)
 
 // router.delete('/:carId', deleteCar)
 
