@@ -53,9 +53,26 @@ class Car {
         )
             .then(({ value: updatedCar}) => {
                 if (!updatedCar) {
-                    throw new Error('Update Failed!')
+                    throw new Error('Update Operation Failed!')
                 }
                 return updatedCar;
+            })
+            .catch(err => {
+                return err;
+            });
+    }
+
+    static delete(id: string) {
+        const db = getDB();
+        const objId = new ObjectId(id)
+
+        return db.collection('cars').findOneAndDelete({ _id: objId })
+            .then(({ value: deletedCar}) => {
+                const deleteFailed = Object.keys(deletedCar).length === 0;
+                if (deleteFailed) {
+                    throw new Error('Delete Operation Failed!')
+                }
+                return deletedCar;
             })
             .catch(err => {
                 return err;

@@ -11,6 +11,6 @@ router.all('/:carId', handleCarRUD)
 
 router.patch('/:carId', handleCarRUD)
 
-// router.delete('/:carId', deleteCar)
+router.delete('/:carId', handleCarRUD)
 
 export default router;

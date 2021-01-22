@@ -52,13 +52,19 @@ export const handleCarRUD: RequestHandler<{ carId: string }> = (req, res) => {
                     res.json({ updatedCar });
                 })
                 .catch(err => {
-                    res.status(404).json({ msg: err });
+                    res.json({ msg: err });
                 });
             break;
 
-//         case 'DELETE':
-//             deleteCar(req, res, index);
-//             break;
+        case 'DELETE':
+            Car.delete(carId)
+                .then(deletedCar => {
+                    res.json({ deletedCar });
+                })
+                .catch(err => {
+                    res.json({ msg: err });
+                });
+            break;
     
         default:
             throw new Error('INVALID REQUEST');
