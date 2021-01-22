@@ -33,7 +33,6 @@ export const getCars: RequestHandler<null, { cars: Car[] } | { errMsg: string }>
 // RUD = Read, Update, Delete
 export const handleCarRUD: RequestHandler<{ carId: string }> = (req, res) => {
     const { carId } = req.params;
-
     switch (req.method) {
         case 'GET':
             Car.findById(carId)
@@ -65,7 +64,6 @@ export const handleCarRUD: RequestHandler<{ carId: string }> = (req, res) => {
                     res.json({ msg: err });
                 });
             break;
-    
         default:
             throw new Error('INVALID REQUEST');
     }
