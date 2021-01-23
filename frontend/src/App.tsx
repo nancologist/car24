@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 // import axios from 'axios';
 import './App.css';
+import logo from './assets/logo.png';
 
 interface ICar {
   _id: string;
@@ -26,10 +27,15 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Car24</h1>
+      <img src={logo} alt="LOGO"/>
       <div className="main-list">
         <div className="main-list__item">
-          { cars.map(car => <p key={car._id}>{car.name}</p>) }
+          {cars.map(car => 
+            <p key={car._id}>
+              <strong>Name: </strong>{car.name} -
+              <strong> Power: </strong>{car.power} HP
+            </p>
+          )}
         </div>
       </div>
     </div>
