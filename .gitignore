@@ -104,3 +104,6 @@ dist
 
 # TernJS port file
 .tern-port
+
+## Nodemon Env. Vars. JSON File:
+**/nodemon.json
