@@ -18,7 +18,7 @@ function App() {
         return respStream.json()
       })
       .then(resp => {
-        setCars(resp.cars)
+        setCars(resp.cars) // WARNING: Use prevState.
       })
       .catch(err => {
         console.log(err) 
