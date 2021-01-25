@@ -25,7 +25,7 @@ function App() {
     <div className="App">
       <img src={logo} alt="LOGO"/>
       <div className="main-list">
-        <div className="main-list__item">
+        <div className="cards">
           {cars.map(car => 
             <Card
               key={car._id}

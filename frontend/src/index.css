@@ -19,3 +19,7 @@ input[type=number] {
 }
 
 /* ------------------------------------------------ */
+
+body {
+  background-color: #ededed;
+}
