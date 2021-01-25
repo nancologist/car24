@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import logo from './assets/logo.png';
 import Card from './components/Card/Card';
+import AppForm from './components/AppForm/AppForm';
 import ICar from './models/Car';
 
 function App() {
@@ -24,15 +25,14 @@ function App() {
   return (
     <div className="App">
       <img src={logo} alt="LOGO"/>
-      <div className="main-list">
-        <div className="cards">
-          {cars.map(car => 
-            <Card
-              key={car._id}
-              car={car}
-            />
-          )}
-        </div>
+      <AppForm/>
+      <div className="cards container">
+        {cars.map(car => 
+          <Card
+            key={car._id}
+            car={car}
+          />
+        )}
       </div>
     </div>
   );

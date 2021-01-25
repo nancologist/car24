@@ -5,10 +5,12 @@ class Car {
     private _id: ObjectId | null; // It must be _id (for MongoDB)
     public name: string;
     public power: number;
+    public price: number;
 
-    constructor(name: string, power: number, id?: string) {
+    constructor(name: string, power: number, price: number, id?: string) {
         this.name = name;
         this.power = power;
+        this.price = price;
         this._id = id ? new ObjectId(id) : null;
     }
 

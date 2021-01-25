@@ -1,0 +1,41 @@
+.app-form-wrapper {
+    padding: 13px 17px;
+    width: fit-content;
+}
+
+.app-form__control {
+    align-items:flex-end;
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.app-form__control label {
+    width: 50px;
+    text-align: left;
+}
+
+.app-form__control input {
+    height: 24px;
+    width: 160px;
+    border: none;
+    border-bottom: 1px solid black;
+    margin-left: 5px;
+    outline: none;
+}
+
+.app-form__submit-btn {
+    padding: 10px 20px;
+    background-color: #333;
+    border-color: #333;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    display: block;
+    margin-top: 30px;
+    width: 100%;
+}
+
+.app-form__submit-btn:hover {
+    color: #333;
+    background-color: #fff;
+}
