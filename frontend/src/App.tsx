@@ -2,12 +2,8 @@ import React, { useEffect, useState } from 'react';
 // import axios from 'axios';
 import './App.css';
 import logo from './assets/logo.png';
-
-interface ICar {
-  _id: string;
-  name: string;
-  power: number;
-}
+import Card from './components/Card/Card';
+import ICar from './models/Car';
 
 function App() {
   const [ cars, setCars ] = useState<ICar[]>([]);
@@ -23,7 +19,7 @@ function App() {
       .catch(err => {
         console.log(err) 
       });
-  }, []);
+  });
 
   return (
     <div className="App">
@@ -31,10 +27,10 @@ function App() {
       <div className="main-list">
         <div className="main-list__item">
           {cars.map(car => 
-            <p key={car._id}>
-              <strong>Name: </strong>{car.name} -
-              <strong> Power: </strong>{car.power} HP
-            </p>
+            <Card
+              key={car._id}
+              car={car}
+            />
           )}
         </div>
       </div>
