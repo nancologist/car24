@@ -108,3 +108,4 @@ dist
 ## Nodemon Env. Vars. JSON File:
 **/nodemon.json
 .DS_Store
+/.idea/
