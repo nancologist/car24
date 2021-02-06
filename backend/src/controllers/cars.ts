@@ -1,13 +1,13 @@
 import { RequestHandler, Request, Response } from 'express';
 import Car from '../models/car';
 
-type inputCar = { name: string; power: number; };
+type inputCar = { name: string; power: number; price: number };
 
 type resType = { message: string; car: Car; };
 
 export const addCar: RequestHandler<null, resType | { errMsg: string }, inputCar> = (req, res) => {
-    const { name, power } = req.body;
-    const car = new Car(name, power);
+    const { name, power, price } = req.body;
+    const car = new Car(name, power, price);
     car.save()
         .then(result => {
             console.log(result);
