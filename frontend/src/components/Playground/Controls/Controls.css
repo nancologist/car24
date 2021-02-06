@@ -1,0 +1,16 @@
+#plus, #minus {
+    border: unset;
+    color: white;
+    margin: 5px;
+    outline: none;
+    width: 50px;
+}
+
+#plus {
+    background-color: green;
+}
+
+#minus {
+    background-color: red;
+}
+

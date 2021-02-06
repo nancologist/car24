@@ -5,6 +5,7 @@ import logo from './assets/logo.png';
 import Card from './components/Card/Card';
 import AppForm from './components/AppForm/AppForm';
 import ICar from './models/Car';
+import Playground from './components/Playground'
 
 function App() {
   const [ cars, setCars ] = useState<ICar[]>([]);
@@ -34,6 +35,7 @@ function App() {
           />
         )}
       </div>
+      <Playground />
     </div>
   );
 }

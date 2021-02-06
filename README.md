@@ -69,3 +69,10 @@ ___
     * Users:
         * "nancologist" - "1BgmNOzX8pWh4Ryf" - "mongodb+srv://nancologist:<password>@cluster0.sgb6o.mongodb.net/<dbname>?retryWrites=true&w=majority"
     * I will go with Native MongoDB Driver for NodeJS WITHOUT Mongoose (one of the reason is to write the Models classes with TS in usual class forms and not using Mongoose Schema constructors.)
+
+# 3. Frontend
+
+## 3.1. Dependencies
+
+* ``redux`` is working with TS
+* ``react-redux`` needs @types : npmjs.com/package/@types/react-redux
