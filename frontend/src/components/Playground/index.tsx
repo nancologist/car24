@@ -1,3 +1,6 @@
+import { connect, ConnectedProps } from 'react-redux'
+import { CountState } from '../../store/pgReducerAndActions'
+
 import Controls from './Controls/index'
 
 const Playground = (props: PropsType) => {
@@ -5,15 +8,23 @@ const Playground = (props: PropsType) => {
         <div>
             <h1>Playground</h1>
             <div>
-                <input type="text" readOnly/>
+                <input type="text" readOnly value={props.val}/>
                 <Controls />
             </div>
         </div>
     )
 }
 
-export default Playground;
+interface PropsType extends PropsFromRedux {}
 
-// ------------------------------------
+type PropsFromRedux = ConnectedProps<typeof connector>;
 
-interface PropsType {}
+const mapStateToProps = (reduxState: CountState) => {
+    return {
+        val: reduxState.count
+    }
+}
+
+const connector = connect(mapStateToProps)
+
+export default connector(Playground);
