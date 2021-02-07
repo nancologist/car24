@@ -3,12 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux';
 // import { countReducer } from './store/pgReducerAndActions'
-import advertReducer from './store/reducer'
+import advertReducer from './store/advert/reducers'
+import ReduxThunk from 'redux-thunk'
 
-const store = createStore(advertReducer);
+const store = createStore(advertReducer, applyMiddleware(ReduxThunk));
 
 ReactDOM.render(
   <React.StrictMode>

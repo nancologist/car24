@@ -1,27 +1,24 @@
-import { Action } from 'redux'
+import {
+    AdvertState,
+    AdvertActionTypes,
+    GET_ADVERTS
+} from './types';
 
-interface StateType {
-    foo: string;
+const initialState: AdvertState = {
+    adverts: []
 }
 
-const initialState = {
-    foo: 'bar'
-}
-
-export const advertReducer = ( state = initialState, action: Action) => {
+export function advertReducer( state = initialState, action: AdvertActionTypes ): AdvertState {
     switch (action.type) {
-        case 'SAVE_ADVERT':
+        case GET_ADVERTS:
+        return {
+            adverts: [ ...action.adverts ]
+        }
             
-            break;
-
-        case 'GET_ADVERTS':
-        
-            break;
-    
         default:
-            break;
+            return state;
     }
-    return state;
+
 }
 
 export default advertReducer;

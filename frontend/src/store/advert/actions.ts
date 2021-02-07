@@ -1,24 +1,20 @@
 import Car from '../../models/Car';
 import { AdvertActionTypes, SAVE_ADVERT, GET_ADVERTS } from './types'
 
-export function saveAdvert(newCar: Car): AdvertActionTypes {
-
-    // Async Function Sending Ajax Request...
-    // using Thunk...
-
+export function saveAdvertStart(newCar: Car): AdvertActionTypes {
     return {
         type: SAVE_ADVERT,
         car: newCar
     }
 }
 
-export function getAdverts(): AdvertActionTypes {
+// TODO: saveAdvertSuccess() { ... }
 
-    // Get Cars from Backend, Ajax Req.
-    // using thunk...
+// TODO: saveAdvertFail() { ... }
 
+export function getAdverts(fetchedCars: Car[]): AdvertActionTypes {
     return {
         type: GET_ADVERTS,
-        cars
+        adverts: fetchedCars
     }
 }
