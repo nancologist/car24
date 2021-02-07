@@ -43,7 +43,7 @@ const initialState = { count: 5 }
 export function countReducer(
     state = initialState,
     action: CountActionTypes    
-) {
+): CountState {
     switch (action.type) {
         case INCREASE_COUNT:
             return {

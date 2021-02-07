@@ -1,5 +1,5 @@
 import './Controls.css';
-import { INCREASE_COUNT, DECREASE_COUNT } from '../../../store/pgReducerAndActions'
+import { increaseCount, decreaseCount } from '../../../store/pgReducerAndActions'
 import { connect, ConnectedProps } from 'react-redux'
 
 const Controls = (props: PropsType) => {
@@ -15,9 +15,24 @@ interface PropsType extends PropsFromRedux {}
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
+/* 
+
+In a shorter way the Redux will wrap the functions of the "mapDispatchToProps" automatically in
+a dispatch(), the longer way was:
+
+const mapDispatchToProps = dispatch => ({
+    prop1: () => dispatch(<ActionCreatorFunc>),
+    prop2: () => dispatch(<ActionCreaterFunc2)
+})
+
+There is also another way, which you won't have mapDispatchToProps object/function at all!
+Instead of that in the Component you should use props.dispatch(<ActionCreatorFunc>).
+
+*/
+
 const mapDispatchToProps = {
-    increaseIt: () => ({ type: INCREASE_COUNT }),
-    decreaseIt: () => ({ type: DECREASE_COUNT })
+    increaseIt: () => (increaseCount()),
+    decreaseIt: () => (decreaseCount())
 }
 
 const connector = connect(null, mapDispatchToProps)
