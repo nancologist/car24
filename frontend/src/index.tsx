@@ -5,9 +5,10 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { createStore } from 'redux'
 import { Provider } from 'react-redux';
-import { countReducer } from './store/pgReducerAndActions'
+// import { countReducer } from './store/pgReducerAndActions'
+import advertReducer from './store/reducer'
 
-const store = createStore(countReducer);
+const store = createStore(advertReducer);
 
 ReactDOM.render(
   <React.StrictMode>

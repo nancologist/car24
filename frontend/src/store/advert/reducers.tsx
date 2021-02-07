@@ -8,10 +8,14 @@ const initialState = {
     foo: 'bar'
 }
 
-const reducer = ( state = initialState, action: Action) => {
+export const advertReducer = ( state = initialState, action: Action) => {
     switch (action.type) {
-        case '':
+        case 'SAVE_ADVERT':
             
+            break;
+
+        case 'GET_ADVERTS':
+        
             break;
     
         default:
@@ -20,4 +24,4 @@ const reducer = ( state = initialState, action: Action) => {
     return state;
 }
 
-export default reducer;
+export default advertReducer;
